@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My CSS</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: white;
+    color: #333;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+.hidden {
+    display: none;
+}
+
+.editor {
+    width: 90%;
+    height: 300px;
+    margin-top: 20px;
+}
+
+iframe {
+    width: 90%;
+    height: 250px;
+    margin-top: 20px;
+    background: white;
+}
+</style>
+</head>
+<body>
+
+<!-- FRONT PAGE -->
+<div id="home" class="container">
+    <h1>Welcome to My CSS.html</h1>
+    <button onclick="goToOptions()">Start</button>
+</div>
+
+<!-- OPTIONS PAGE -->
+<div id="options" class="container hidden">
+    <h1>Choose Language</h1>
+    <button onclick="openEditor('html')">HTML</button>
+    <button onclick="openEditor('css')">CSS</button>
+    <button onclick="openEditor('javascript')">Java</button>
+    <button onclick="openEditor('python')">Python</button>
+</div>
+
+<!-- EDITOR PAGE -->
+<div id="editorPage" class="container hidden">
+    <h1 id="langTitle"></h1>
+    <textarea id="code" class="editor" placeholder="Write your code here..."></textarea>
+    <br>
+    <button onclick="runCode()">Run Code</button>
+    <iframe id="output"></iframe>
+</div>
+
+<script>
+function goToOptions() {
+    document.getElementById('home').classList.add('hidden');
+    document.getElementById('options').classList.remove('hidden');
+}
+
+function openEditor(lang) {
+    document.getElementById('options').classList.add('hidden');
+    document.getElementById('editorPage').classList.remove('hidden');
+    document.getElementById('langTitle').innerText = lang.toUpperCase() + ' Editor';
+}
+
+function runCode() {
+    let code = document.getElementById('code').value;
+    let output = document.getElementById('output').contentWindow.document;
+    output.open();
+    output.write(code);
+    output.close();
+}
+</script>
+
+</body>
+</html>
